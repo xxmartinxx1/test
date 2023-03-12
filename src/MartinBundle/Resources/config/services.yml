@@ -1,0 +1,18 @@
+#services:
+#    martin.example:
+#        class: MartinBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+services:
+  MartinBundle\Repository\UserRepository:
+    class: MartinBundle\Repository\UserRepository
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+
+  app.user_service:
+    class: MartinBundle\Service\UserService
+    arguments:
+      - '@MartinBundle\Repository\UserRepository'
+
+  MartinBundle\Form\UserType:
+    tags: [ form.type ]

@@ -1,0 +1,11 @@
+martin_homepage:
+    path:     /
+    defaults: { _controller: MartinBundle:Default:index }
+
+user_page:
+    path:     /user/{id}/
+    defaults: { _controller: MartinBundle:Default:user_page }
+
+user_add_page:
+    path:   /add-user/
+    defaults: { _controller: MartinBundle:Default:addUser }
