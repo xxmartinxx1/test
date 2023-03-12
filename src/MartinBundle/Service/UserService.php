@@ -20,4 +20,9 @@ class UserService
     {
         return $this->userRepository->findAllUser();
     }
+
+    public function addUser(string $user, string $email)
+    {
+        return $this->userRepository->addUser($user, $email);
+    }
 }

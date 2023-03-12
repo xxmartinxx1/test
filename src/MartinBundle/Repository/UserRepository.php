@@ -45,6 +45,14 @@ class UserRepository
 
     public function addUser(string $name, string $email){
         $connection = $this->container->get('database_connection');
+
+        // sprawdź, czy podany adres e-mail już istnieje w bazie
+        $existingUser = $connection->fetchAssoc('SELECT * FROM user WHERE email = ?', array($email));
+        if ($existingUser) {
+            return 'E-mail address already exists';
+        }
+
+        // dodaj nowego użytkownika do bazy
         $sql = 'INSERT INTO user (name, email) VALUES (?, ?)';
         $connection->executeUpdate($sql, array($name, $email));
 

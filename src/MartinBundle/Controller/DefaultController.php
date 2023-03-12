@@ -51,11 +51,12 @@ class DefaultController extends Controller
         $form = $this->createForm('MartinBundle\Form\AddUserType', $data);
         $form->handleRequest($request);
 
+        $return = '';
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             dump($data);
             $repo = $this->get('MartinBundle\Repository\UserRepository');
-            $repo->addUser($data['name'], $data['email']);
+            $return = $repo->addUser($data['name'], $data['email']);
 
             // przekieruj użytkownika na stronę sukcesu
             //return $this->redirectToRoute('user_add_page');
@@ -63,6 +64,7 @@ class DefaultController extends Controller
 
         return $this->render('MartinBundle:Default:user-add-page.html.twig', [
             'form' => $form->createView(),
+            'message' => $return,
         ]);
     }
 }
